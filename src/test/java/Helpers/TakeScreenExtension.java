@@ -23,7 +23,6 @@ public class TakeScreenExtension {
         cleanScreenFolder();
     }
 
-    // ToDo ref - add base artefacts path const
     private void setTestScreenPath(String testName) {
         String projectPath = System.getProperty("user.dir");
         testScreenPath = projectPath + "/test_artefacts/" + testName + "/screenshots";

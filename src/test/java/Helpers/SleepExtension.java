@@ -1,7 +1,7 @@
 package Helpers;
 
 public class SleepExtension {
-    public static void sleep(int time) { // ToDo check static
+    public static void sleep(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
