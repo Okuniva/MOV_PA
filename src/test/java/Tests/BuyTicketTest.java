@@ -5,12 +5,12 @@ import Pages.MainPage;
 import TestFixtures.BaseTestFixture;
 import org.junit.jupiter.api.Test;
 
-public class LoginTest extends BaseTestFixture {
+public class BuyTicketTest extends BaseTestFixture {
     @Test
-    public void Login() {
+    public void BuyTicket() {
         new MainPage(driver)
                 .isInitialized()
-                .tap_account_icon()
+                .tap_new_ticket()
                 .tap_login_allert_button();
 
         new LoginPage(driver)
@@ -19,6 +19,8 @@ public class LoginTest extends BaseTestFixture {
                 .tap_login();
 
         new MainPage(driver)
-                .isInitialized();
+                .isInitialized()
+                .tap_new_ticket()
+                .tap_enter();
     }
 }

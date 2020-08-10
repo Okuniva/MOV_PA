@@ -6,6 +6,7 @@ import Helpers.TakeScreenExtension;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.http.ParseException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ import java.nio.file.Paths;
 
 
 public abstract class BaseTestFixture {
-    protected AppiumDriver<MobileElement> driver;
+    protected IOSDriver<MobileElement> driver;
 
     @BeforeEach
     public void setUp(TestInfo testInfo) {
@@ -90,8 +91,10 @@ public abstract class BaseTestFixture {
         // optional
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability("autoAcceptAlerts", true);
+        capabilities.setCapability("unicodeKeyboard", true);
+        capabilities.setCapability("resetKeyboard", true);
         capabilities.setCapability(MobileCapabilityType.NO_RESET, config.getNoReset());
 
-        driver = new AppiumDriver<>(driverUrl, capabilities);
+        driver = new IOSDriver<>(driverUrl, capabilities);
     }
 }
