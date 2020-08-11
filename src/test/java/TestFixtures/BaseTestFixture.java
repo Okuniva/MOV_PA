@@ -60,6 +60,9 @@ public abstract class BaseTestFixture {
             currentConfig.setPlatform(jsonFile.getString("platform"));
             currentConfig.setAppiumServer(jsonFile.getString("appiumServer"));
             currentConfig.setDeviceName(jsonFile.getString("deviceName"));
+            currentConfig.setBundleid(jsonFile.getString("bundleId"));
+            currentConfig.setXcodeOrgId(jsonFile.getString("xcodeOrgId"));
+            currentConfig.setUpdatedWDABundleId(jsonFile.getString("updatedWDABundleId"));
 
             return currentConfig;
 
@@ -88,13 +91,26 @@ public abstract class BaseTestFixture {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, config.getPlatform());
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
 
+        // important for run on real device
+        capabilities.setCapability("udid", "auto");
+        capabilities.setCapability("xcodeSigningId", "iPhone Developer");
+        if(isNullOrEmpty(config.getBundleid()))
+            capabilities.setCapability("bundleId", config.getBundleid());
+        if(isNullOrEmpty(config.getXcodeOrgId()))
+            capabilities.setCapability("xcodeOrgId", config.getXcodeOrgId());
+        if(isNullOrEmpty(config.getUpdatedWDABundleId()))
+            capabilities.setCapability("updatedWDABundleId", config.getUpdatedWDABundleId());
+
         // optional
         capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability("autoAcceptAlerts", true);
         capabilities.setCapability("unicodeKeyboard", true);
         capabilities.setCapability("resetKeyboard", true);
         capabilities.setCapability(MobileCapabilityType.NO_RESET, config.getNoReset());
 
         driver = new IOSDriver<>(driverUrl, capabilities);
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.isEmpty();
     }
 }

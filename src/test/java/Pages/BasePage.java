@@ -171,6 +171,22 @@ public abstract class BasePage {
                 .perform();
     }
 
+    protected void swipe_top_to_down() {
+        Dimension size = driver.manage().window().getSize();
+        int starty = (int) (size.height * 0.2);
+        int endy = (int) (size.height * 0.9);
+        int startx = size.width / 2;
+        System.out.println("starty = " + starty + " ,endy = " + endy + " , startx = " + startx);
+
+
+        TouchAction actions = new TouchAction(driver);
+        actions.press(new PointOption().withCoordinates(startx, starty))
+                .waitAction(waitOptions(Duration.ofSeconds(2)))
+                .moveTo(new PointOption().withCoordinates(startx, endy))
+                .release()
+                .perform();
+    }
+
     public void scrollUsingTouchActionsByElements(MobileElement startElement, MobileElement endElement) {
         TouchAction actions = new TouchAction(driver);
         actions.press(new PointOption().withCoordinates(startElement.getLocation()))

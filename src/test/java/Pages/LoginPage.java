@@ -37,4 +37,18 @@ public class LoginPage extends BasePage {
 
         return this;
     }
+
+    public LoginPage tap_alert_done() {
+        By continue_button = MobileBy.name("Done");
+        tap(continue_button);
+
+        return this;
+    }
+
+    public LoginPage wait_auth_error_alert() {
+        By authentication_failed = MobileBy.name("Authentication Failed");
+        waitPresence(authentication_failed);
+
+        return this;
+    }
 }
